@@ -1,0 +1,37 @@
+body {
+  text-align: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url("./background.jpg");
+  background-size: cover;
+  font-family: Poppins, arial, "sans-serif";
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgb(44, 3, 52);
+  font-size: 1.6rem;
+  height: 5rem;
+}
+
+span {
+  color: rgb(150, 8, 150);
+}
+
+main {
+  min-height: 50rem;
+  color: white;
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin: auto;
+}
+
+
+
+

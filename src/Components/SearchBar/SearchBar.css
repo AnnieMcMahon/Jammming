@@ -1,0 +1,21 @@
+#search-bar {
+  display: block;
+}
+
+#search-term {
+  width: 20rem;
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin: 2rem auto;
+}
+
+#search-btn {
+  color: white;
+  background-color: rgb(44, 3, 52);
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 50px;
+  margin-bottom: 1rem;
+  width: 10rem;
+  font-size: 1rem;
+}
