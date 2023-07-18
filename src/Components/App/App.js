@@ -1,19 +1,29 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 
 function App() {
   const trackList = [
-    {id: 1, title: "Always", singer: "Bryan Adams"},
-    {id: 2, title: "New Town Velocity", singer: "Johnny Marr"},
-    {id: 3, title: "Bold", singer: "Liam Gallagher"}
+    {id: "1", title: "Always", singer: "Bryan Adams", album: "Bryan Adams"},
+    {id: "2", title: "New Town Velocity", singer: "Johnny Marr", album: "Johnny"},
+    {id: "3", title: "Bold", singer: "Liam Gallagher", album: "Liam"}
   ];
   const newPlaylist = [
-    {id: 4, title: "Run To You", singer: "Bryan Adams"},
-    {id: 5, title: "Walk Into the Sea", singer: "Johnny Marr"},
+    {id: "4", title: "Run To You", singer: "Bryan Adams", album: "Bryan Adams"},
+    {id: "5", title: "Walk Into the Sea", singer: "Johnny Marr", album: "Johnny"}
   ];
+
+  const [ listName, setListName ] = useState("New List");
+  const [ songList, setSongList ] = useState([]);
+  const [ playlist, setPlaylist ] = useState([]);
+
+  useEffect(() => {
+    setListName("My Random Playlist");
+    setSongList(trackList);
+    setPlaylist(newPlaylist);
+  }, []);
 
   return (
     <div className="App">
@@ -23,8 +33,8 @@ function App() {
       <main>
         <SearchBar />
         <div className="container">
-          <SearchResults songs={trackList}/>
-          <Playlist songs={newPlaylist}/>
+          <SearchResults songs={songList}/>
+          <Playlist songs={playlist} name={listName}/>
         </div>
       </main>
     </div>
