@@ -1,4 +1,6 @@
 .track {
+  display: flex;
+  justify-content: space-between;
   border: 1px solid black;
   color: black;
   background-color: rgb(234, 194, 234);
@@ -10,4 +12,15 @@
 
 .track p {
   line-height:60%;
+}
+
+.add-btn {
+  padding: 0.3rem 0.5rem;
+  margin: 0.5rem;
+  align-self: right;
+}
+
+.add-btn:hover {
+  cursor: pointer;
+  background-color:rgb(234, 194, 234);
 }
