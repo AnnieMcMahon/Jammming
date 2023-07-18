@@ -10,11 +10,17 @@
 
 #save-btn {
   color: white;
-  background-color: rgb(182, 10, 216);
+  background-color: rgb(135, 7, 160);
   padding: 1rem;
   border: 1px solid black;
   border-radius: 50px;
   margin-bottom: 1rem;
   width: 15rem;
   font-size: 1rem;
+}
+
+
+#save-btn:hover {
+  cursor: pointer;
+  background-color:rgb(109, 7, 130)
 }

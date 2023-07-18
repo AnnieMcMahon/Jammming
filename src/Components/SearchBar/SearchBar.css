@@ -6,7 +6,7 @@
   width: 20rem;
   font-size: 1.3rem;
   padding: 1rem;
-  margin: 2rem auto;
+  margin: 0.5rem auto;
 }
 
 #search-btn {
@@ -18,4 +18,9 @@
   margin-bottom: 1rem;
   width: 10rem;
   font-size: 1rem;
+}
+
+#search-btn:hover {
+  cursor: pointer;
+  background-color:rgb(109, 7, 130)
 }
