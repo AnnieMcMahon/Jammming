@@ -13,7 +13,6 @@ function App() {
   const newPlaylist = [
     {id: 4, title: "Run To You", singer: "Bryan Adams"},
     {id: 5, title: "Walk Into the Sea", singer: "Johnny Marr"},
-    {id: 6, title: "I Wanna Know What Love Is", singer: "Whitney Houston"}
   ];
 
   return (

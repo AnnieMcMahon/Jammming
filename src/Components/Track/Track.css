@@ -1,7 +1,8 @@
 #track {
   border: 1px solid black;
-  background-color: rgb(114, 65, 114);
-  margin: 0.5rem;
-  padding: 0.5rem;
+  color: black;
+  background-color: rgb(234, 194, 234);
+  margin: 0.3rem 1rem;
+  padding-left: 0.5rem;
   text-align: left;
 }
