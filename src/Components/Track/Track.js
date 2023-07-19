@@ -3,7 +3,11 @@ import "./Track.css";
 
 function Track(prop) {
   const handleClick = (event) => {
-    prop.addToPlaylist(event.target.id);
+    if (prop.btn === "+") {
+      prop.addToPlaylist(event.target.id);
+    } else {
+      prop.removeFromPlaylist(event.target.id);
+    };
   };
 
   return (

@@ -32,6 +32,16 @@ function App() {
     };
   };
 
+  const removeFromPlaylist = track => {
+    track = parseInt(track);
+    const oldTrack = playlist.filter(song => song.id === track);
+    const isInSongList = songList.filter(song => song.id === track);
+    if (isInSongList.length === 0 && oldTrack.length !==0) {
+      setSongList((prev) => [...prev, oldTrack[0]]);
+      setPlaylist((prev) => prev.filter(song => song.id !== track));
+    };
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -41,7 +51,7 @@ function App() {
         <SearchBar />
         <div className="container">
           <SearchResults songs={songList} addToPlaylist={addToPlaylist}/>
-          <Playlist songs={playlist} name={listName} />
+          <Playlist songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} />
         </div>
       </main>
     </div>
