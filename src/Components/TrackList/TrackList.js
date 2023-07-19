@@ -5,7 +5,7 @@ import Track from "../Track/Track";
 function TrackList(prop) {
   return (
     <div id="track-list">
-      {prop.songs?.map(song => <Track song={song} key={song.id}/>)}
+      {prop.songs?.map(song => <Track song={song} key={song.id} btn={prop.btn} addToPlaylist={prop.addToPlaylist}/>)}
     </div>
   );
 };

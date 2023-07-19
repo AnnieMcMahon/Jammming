@@ -8,7 +8,7 @@ function Playlist(prop) {
   return (
     <div id="playlist">
       <h2>{name}</h2>
-      <TrackList songs={prop.songs}/>
+      <TrackList songs={prop.songs} btn="-"/>
       <button id="save-btn" type="submit">SAVE TO SPOTIFY</button>
     </div>
   );
