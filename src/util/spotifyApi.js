@@ -2,7 +2,7 @@ const baseUrl = "https://api.spotify.com";
 let apiKey = "";
 
 const getSearchResults = async (param) => {
-  const endpoint = `${baseUrl}/v1/search?q=${param}?type=track`;
+  const endpoint = `${baseUrl}/v1/search?q=${param}&type=track`;
   console.log(endpoint);
   if (!apiKey) {
     apiKey = await getKey();
@@ -10,7 +10,7 @@ const getSearchResults = async (param) => {
   try {
     const response = await fetch(endpoint,
       {
-        header:
+        headers:
         {
           Authorization: `Bearer ${apiKey}`
         }
