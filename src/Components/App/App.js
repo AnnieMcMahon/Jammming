@@ -1,9 +1,9 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import getKey from '../../util/spotify';
+import getKey from '../../util/spotifyApi';
 
 function App() {
   const trackList = [
@@ -17,6 +17,16 @@ function App() {
   const [listName, setListName] = useState('');
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
+
+  let key = "";
+
+  const getAccessKey = async() => {
+    key = await getKey();
+  };
+
+  useEffect(() => {
+    getAccessKey();
+  }, []);
 
   const loadSearchResults = (searchTerm) => {
     console.log(searchTerm);
