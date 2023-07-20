@@ -13,8 +13,8 @@ function Track(prop) {
   return (
     <div className="track">
       <div className="info">
-        <p>{prop.song.title} | {prop.song.singer}</p>
-        <p className="album">{prop.song.album}</p>
+        <p className="title">{prop.song.title}</p>
+        <p className="info">{prop.song.singer} | {prop.song.album}</p>
       </div>
       <button className="add-btn" id={prop.song.id} onClick={handleClick}>{prop.btn}</button>
     </div>

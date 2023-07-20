@@ -5,7 +5,7 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 
 function App() {
-  const [listName, setListName] = useState('New List');
+  const [listName, setListName] = useState('');
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
 
@@ -17,9 +17,7 @@ function App() {
       { id: 4, title: "Run To You", singer: "Bryan Adams", album: "Bryan Adams" },
       { id: 5, title: "Walk Into the Sea", singer: "Johnny Marr", album: "Johnny" }
     ];
-    setListName("My Random Playlist");
     setSongList(trackList);
-    setPlaylist([]);
   }, []);
 
   const addToPlaylist = track => {
@@ -42,6 +40,10 @@ function App() {
     };
   };
 
+  const changeListName = (name) => {
+    setListName(name);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -51,7 +53,7 @@ function App() {
         <SearchBar />
         <div className="container">
           <SearchResults songs={songList} addToPlaylist={addToPlaylist}/>
-          <Playlist songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} />
+          <Playlist songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} changeListName={changeListName} />
         </div>
       </main>
     </div>
