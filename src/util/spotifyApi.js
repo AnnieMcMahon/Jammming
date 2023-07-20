@@ -1,30 +1,28 @@
 const baseUrl = "https://api.spotify.com/v1";
 let accessToken = "";
-
-let playlist_id = "";
-let user_id = "";
-
+let playlistId = "";
+let userId = "";
 
 //GET TOKEN 
 const getToken = async () => {
+  if (accessToken) {
+    return accessToken;
+  };
   const redirectUri = "http://localhost:3000"
   const client_id = process.env.REACT_APP_SPOTIFY_ID;
-      if (accessToken) {
-      return accessToken;
-    };
-    const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
-    const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
-    if (accessTokenMatch && expiresInMatch) {
-      accessToken = accessTokenMatch[1];
-      const expiresIn = Number(expiresInMatch[1]);
-      window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
-      window.history.pushState("Access Token", null, "/");
-      return accessToken;
-    } else {
-      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
-      window.location = accessUrl;
-    };
+  const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
+  const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
+  if (accessTokenMatch && expiresInMatch) {
+    accessToken = accessTokenMatch[1];
+    const expiresIn = Number(expiresInMatch[1]);
+    window.setTimeout(() => (accessToken = ""), expiresIn * 1000);
+    window.history.pushState("Access Token", null, "/");
+    return accessToken;
+  } else {
+    const accessUrl = `https://accounts.spotify.com/authorize?client_id=${client_id}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
+    window.location = accessUrl;
   };
+};
 
 //GET SEARCH RESULTS
 const getSearchResults = async (param) => {
@@ -32,15 +30,9 @@ const getSearchResults = async (param) => {
   if (!accessToken) {
     accessToken = await getToken();
   };
+  const requestParams = { headers: { Authorization: `Bearer ${accessToken}` } };
   try {
-    const response = await fetch(endpoint,
-      {
-        headers:
-        {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }
-    );
+    const response = await fetch(endpoint, requestParams);
     if (response.ok) {
       const jsonResponse = await response.json();
       const trackList = jsonResponse.tracks.items.map(track => ({
@@ -56,35 +48,45 @@ const getSearchResults = async (param) => {
     console.log(error);
   }
 };
+
 // GET USER ID
 const getUserId = async () => {
-  const url = `${baseUrl}/me`;
+  const endpoint = `${baseUrl}/me`;
+  if (!accessToken) {
+    accessToken = await getToken();
+  };
+  const requestParams = { headers: { Authorization: `Bearer ${accessToken}` } };
+  try {
+    const response = await fetch(endpoint, requestParams);
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      userId = jsonResponse.id;
+      console.log(userId);
+      return userId;
+    }
+  } catch (error) {
+    console.log(error);
+  };
 };
 
 // SAVE NEW PLAYLIST
 const saveNewPlaylist = async (name, list) => {
-  const user_id = "";
-  const url = `${baseUrl}/users/${user_id}/playlists`;
-  const authOptions = {
+  userId = await getUserId();
+
+  const endpoint = `${baseUrl}/users/${userId}/playlists`;
+  if (!accessToken) {
+    accessToken = await getToken();
+  };
+  const requestParams = {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      name: name,
-      description: "New playlist created using Jammming",
-      public: false
-    })
+    body: JSON.stringify({ name: name })
   };
-
-  if (!accessToken) {
-    accessToken = await getToken();
-  }
-
   try {
-    const response = await fetch(url, authOptions);
-
+    const response = await fetch(endpoint, requestParams);
     if (response.ok) {
       console.log('Playlist has been created');
       await addSongsToList(name, list);
@@ -93,7 +95,7 @@ const saveNewPlaylist = async (name, list) => {
     }
   } catch (error) {
     console.log('Error creating playlist:', error);
-  
+
     if (error.response) {
       console.log('Response status:', error.response.status);
       console.log('Response data:', error.response.data);
@@ -103,8 +105,8 @@ const saveNewPlaylist = async (name, list) => {
 
 //ADD SONGS TO LIST
 const addSongsToList = async (name, list) => {
-  const url = `${baseUrl}/users/${user_id}/playlists/${playlist_id}/tracks`;
+  const endpoint = `${baseUrl}/users/${userId}/playlists/${playlistId}/tracks`;
   console.log('adding songs');
-}
+};
 
-export { getSearchResults, saveNewPlaylist };
+export { getToken, getSearchResults, saveNewPlaylist };

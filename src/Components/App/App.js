@@ -1,14 +1,18 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import { getSearchResults, saveNewPlaylist } from '../../util/spotifyApi';
+import { getSearchResults, saveNewPlaylist, getToken } from '../../util/spotifyApi';
 
 function App() {
   const [listName, setListName] = useState('');
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
+
+  useEffect(() => {
+    getToken();
+  }, []);
 
   const loadSearchResults = async (searchTerm) => {
     const newTracks = await getSearchResults(searchTerm);
