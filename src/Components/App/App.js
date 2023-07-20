@@ -1,19 +1,11 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import { getSearchResults } from '../../util/spotifyApi';
+import { getSearchResults, saveNewPlaylist } from '../../util/spotifyApi';
 
 function App() {
-  const trackList = [
-    { id: 1, title: "Always", singer: "Bryan Adams", album: "Bryan Adams", uri: "12345abcde" },
-    { id: 2, title: "New Town Velocity", singer: "Johnny Marr", album: "Johnny", uri: "klsjdflajdslfhasd" },
-    { id: 3, title: "Bold", singer: "Liam Gallagher", album: "Liam", uri: "lasdkjfaicoasd" },
-    { id: 4, title: "Run To You", singer: "Bryan Adams", album: "Bryan Adams", uri: "lajsd909023jl" },
-    { id: 5, title: "Walk Into the Sea", singer: "Johnny Marr", album: "Johnny", uri: "kjsdcv30wiej" }
-  ];
-
   const [listName, setListName] = useState('');
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
@@ -45,10 +37,9 @@ function App() {
     setListName(name);
   };
 
-  const saveToSpotify = () => {
+  const saveToSpotify = async () => {
     const uriList = playlist.map(song => song.uri);
-    console.log(`list saved: ${uriList}`);
-    loadSearchResults('reset');
+    saveNewPlaylist(listName, uriList);
     setPlaylist([]);
     setListName('');
   };
