@@ -13,11 +13,14 @@ function Playlist(prop) {
     };
   };
 
+  const handleClick = () => {
+    prop.saveToSpotify();
+  }
   return (
     <div id="playlist">
       <h2><input id="playlist-name" placeholder="Name your playlist" onChange={handleChange} value={name} /></h2>
       <TrackList songs={prop.songs} btn="-" removeFromPlaylist={prop.removeFromPlaylist} />
-      <button id="save-btn" type="submit">SAVE TO SPOTIFY</button>
+      <button id="save-btn" type="submit" onClick={handleClick}>SAVE TO SPOTIFY</button>
     </div>
   );
 };

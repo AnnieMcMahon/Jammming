@@ -5,20 +5,29 @@ import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
 
 function App() {
+
+  const trackList = [
+    { id: 1, title: "Always", singer: "Bryan Adams", album: "Bryan Adams", uri: "12345abcde" },
+    { id: 2, title: "New Town Velocity", singer: "Johnny Marr", album: "Johnny", uri: "klsjdflajdslfhasd" },
+    { id: 3, title: "Bold", singer: "Liam Gallagher", album: "Liam", uri: "lasdkjfaicoasd" },
+    { id: 4, title: "Run To You", singer: "Bryan Adams", album: "Bryan Adams", uri: "lajsd909023jl" },
+    { id: 5, title: "Walk Into the Sea", singer: "Johnny Marr", album: "Johnny", uri: "kjsdcv30wiej" }
+  ];
+
   const [listName, setListName] = useState('');
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
 
-  useEffect(() => {
-    const trackList = [
-      { id: 1, title: "Always", singer: "Bryan Adams", album: "Bryan Adams" },
-      { id: 2, title: "New Town Velocity", singer: "Johnny Marr", album: "Johnny" },
-      { id: 3, title: "Bold", singer: "Liam Gallagher", album: "Liam" },
-      { id: 4, title: "Run To You", singer: "Bryan Adams", album: "Bryan Adams" },
-      { id: 5, title: "Walk Into the Sea", singer: "Johnny Marr", album: "Johnny" }
-    ];
+  
+  // useEffect(() => {
+  //   loadSearchResults('Hello');
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  const loadSearchResults = (searchTerm) => {
+    console.log(searchTerm);
     setSongList(trackList);
-  }, []);
+  };
 
   const addToPlaylist = track => {
     track = parseInt(track);
@@ -42,7 +51,15 @@ function App() {
 
   const changeListName = (name) => {
     setListName(name);
-  }
+  };
+
+  const saveToSpotify = () => {
+    const uriList = playlist.map(song => song.uri);
+    console.log(`list saved: ${uriList}`);
+    loadSearchResults('reset');
+    setPlaylist([]);
+    setListName('');
+  };
 
   return (
     <div className="App">
@@ -50,10 +67,10 @@ function App() {
         <h1>Ja<span>mmm</span>ing</h1>
       </header>
       <main>
-        <SearchBar />
+        <SearchBar loadSearchResults={loadSearchResults}/>
         <div className="container">
           <SearchResults songs={songList} addToPlaylist={addToPlaylist}/>
-          <Playlist songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} changeListName={changeListName} />
+          <Playlist songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} changeListName={changeListName} saveToSpotify={saveToSpotify} />
         </div>
       </main>
     </div>
