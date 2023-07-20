@@ -1,11 +1,11 @@
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import getKey from '../../util/spotify';
 
 function App() {
-
   const trackList = [
     { id: 1, title: "Always", singer: "Bryan Adams", album: "Bryan Adams", uri: "12345abcde" },
     { id: 2, title: "New Town Velocity", singer: "Johnny Marr", album: "Johnny", uri: "klsjdflajdslfhasd" },
@@ -17,12 +17,6 @@ function App() {
   const [listName, setListName] = useState('');
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
-
-  
-  // useEffect(() => {
-  //   loadSearchResults('Hello');
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const loadSearchResults = (searchTerm) => {
     console.log(searchTerm);
