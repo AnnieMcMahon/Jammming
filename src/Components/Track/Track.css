@@ -11,7 +11,7 @@
 }
 
 .track p {
-  line-height:60%;
+  line-height:70%;
 }
 
 .add-btn {
@@ -30,10 +30,10 @@
 
 .title {
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 
 .info {
   font-weight: lighter;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }

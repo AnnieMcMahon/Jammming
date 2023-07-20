@@ -18,14 +18,12 @@ function App() {
   const [songList, setSongList] = useState([]);
   const [playlist, setPlaylist] = useState([]);
 
-  const loadSearchResults = (searchTerm) => {
-    const newTracks = getSearchResults(searchTerm);
-    console.log(newTracks);
-    setSongList(trackList);
+  const loadSearchResults = async (searchTerm) => {
+    const newTracks = await getSearchResults(searchTerm);
+    setSongList(newTracks);
   };
 
   const addToPlaylist = track => {
-    track = parseInt(track);
     const newTrack = songList.filter(song => song.id === track);
     const isInPlaylist = playlist.filter(song => song.id === track);
     if (isInPlaylist.length === 0 && newTrack.length !== 0) {
@@ -35,7 +33,6 @@ function App() {
   };
 
   const removeFromPlaylist = track => {
-    track = parseInt(track);
     const oldTrack = playlist.filter(song => song.id === track);
     const isInSongList = songList.filter(song => song.id === track);
     if (isInSongList.length === 0 && oldTrack.length !== 0) {

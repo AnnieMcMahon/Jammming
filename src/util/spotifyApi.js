@@ -18,7 +18,13 @@ const getSearchResults = async (param) => {
     );
     if (response.ok) {
       const jsonResponse = await response.json();
-      const trackList = jsonResponse.tracks.items;
+      const trackList = jsonResponse.tracks.items.map(track => ({
+        id: track.id,
+        title: track.name,
+        singer: track.artists[0].name,
+        album: track.album.name,
+        uri: track.uri
+      }));
       return trackList;
     }
   } catch (error) {
