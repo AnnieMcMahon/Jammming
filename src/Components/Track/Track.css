@@ -4,14 +4,9 @@
   border: 1px solid black;
   color: black;
   background-color: rgb(234, 194, 234);
-  margin: 0.3rem 1rem;
   padding-left: 0.5rem;
+  margin: 0.3rem 1rem;
   text-align: left;
-  font-size: 0.9rem;
-}
-
-.track p {
-  line-height:70%;
 }
 
 .add-btn {
@@ -31,7 +26,7 @@
 .title {
   font-weight: bold;
   font-size: 0.9rem;
-}
+  }
 
 .info {
   font-weight: lighter;
