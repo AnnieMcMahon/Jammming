@@ -9,7 +9,7 @@ const getToken = async () => {
   if (accessToken) {
     return accessToken;
   };
-  const redirectUri = "http://localhost:3000"
+  const redirectUri = "http://annie-jammming.netlify.app"
   const client_id = process.env.REACT_APP_SPOTIFY_ID;
   const accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
   const expiresInMatch = window.location.href.match(/expires_in=([^&]*)/);
