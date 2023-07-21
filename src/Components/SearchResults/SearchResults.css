@@ -1,9 +1,0 @@
-#search-results {
-  display: inline-block;
-  width: 40%;
-  min-height: 30rem;
-  background-color: rgb(44, 3, 52);
-  margin: 0 1rem;
-  border: 1px solid black;
-  border-radius: 10px;
-}

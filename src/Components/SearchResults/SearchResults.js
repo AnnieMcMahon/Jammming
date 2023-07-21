@@ -4,7 +4,7 @@ import TrackList from "../TrackList/TrackList";
 
 function SearchResults(prop) {
   return (
-    <div id="search-results">
+    <div id="search-results" className="box">
       <h2>Results</h2>
       <TrackList songs={prop.songs} btn="+" addToPlaylist={prop.addToPlaylist}/>
     </div>

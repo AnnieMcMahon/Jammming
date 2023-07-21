@@ -2,6 +2,7 @@
   text-align: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.7),rgba(0, 0, 0, 0.7)), url("./background.jpg");
   background-size: cover;
+  background-attachment: fixed;
   font-family: Poppins, arial, "sans-serif";
   box-sizing: border-box;
 }
@@ -14,7 +15,6 @@ header {
   background-color: rgb(44, 3, 52);
   font-size: 1.6rem;
   height: 5rem;
-  width: 100%;
 }
 
 span {
@@ -28,9 +28,28 @@ main {
 
 .container {
   display: flex;
-  width: 80%;
   justify-content: center;
   margin: auto;
+}
+
+.box {
+  display: inline-block;
+  width: 40%;
+  min-height: 30rem;
+  background-color: rgb(44, 3, 52);
+  margin: 0 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: rgb(44, 3, 52);
+  height: 3rem;
+  margin-top: 1rem;
 }
 
 

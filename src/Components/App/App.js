@@ -56,10 +56,13 @@ function App() {
       <main>
         <SearchBar loadSearchResults={loadSearchResults} />
         <div className="container">
-          <SearchResults songs={songList} addToPlaylist={addToPlaylist} />
-          <Playlist songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} changeListName={changeListName} saveToSpotify={saveToSpotify} />
+          <SearchResults className="box" songs={songList} addToPlaylist={addToPlaylist} />
+          <Playlist className="box" songs={playlist} name={listName} removeFromPlaylist={removeFromPlaylist} changeListName={changeListName} saveToSpotify={saveToSpotify} />
         </div>
       </main>
+      <footer>
+        <p>Codecademy project created by Annie McMahon, 2023</p>
+      </footer>
     </div>
   );
 };
