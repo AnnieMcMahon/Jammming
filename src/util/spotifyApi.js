@@ -1,7 +1,8 @@
 const baseUrl = "https://api.spotify.com/v1";
 let accessToken = "";
-let playlistId = "";
 let userId = "";
+let playlistId = "";
+
 
 //GET TOKEN 
 const getToken = async () => {
@@ -61,7 +62,6 @@ const getUserId = async () => {
     if (response.ok) {
       const jsonResponse = await response.json();
       userId = jsonResponse.id;
-      console.log(userId);
       return userId;
     }
   } catch (error) {
@@ -72,7 +72,9 @@ const getUserId = async () => {
 // SAVE NEW PLAYLIST
 const saveNewPlaylist = async (name, list) => {
   userId = await getUserId();
-
+  const tracks = list.map(track => {
+    return `${track}`;
+  });
   const endpoint = `${baseUrl}/users/${userId}/playlists`;
   if (!accessToken) {
     accessToken = await getToken();
@@ -89,9 +91,9 @@ const saveNewPlaylist = async (name, list) => {
     const response = await fetch(endpoint, requestParams);
     if (response.ok) {
       console.log('Playlist has been created');
-      await addSongsToList(name, list);
-    } else {
-      console.log('Failed to create playlist:', response.status, response.statusText);
+      const jsonResponse = await response.json();
+      playlistId = jsonResponse.id;
+      await addSongsToList(tracks);
     }
   } catch (error) {
     console.log('Error creating playlist:', error);
@@ -104,9 +106,24 @@ const saveNewPlaylist = async (name, list) => {
 };
 
 //ADD SONGS TO LIST
-const addSongsToList = async (name, list) => {
+const addSongsToList = async (tracks) => {
   const endpoint = `${baseUrl}/users/${userId}/playlists/${playlistId}/tracks`;
-  console.log('adding songs');
+  const requestParams = {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ uris: tracks })
+  };
+  try {
+    const response = await fetch(endpoint, requestParams);
+    if (response.ok) {
+      console.log('Songs have been added');
+    }
+  } catch (error) {
+    console.log('Error adding songs:', error);
+  }
 };
 
 export { getToken, getSearchResults, saveNewPlaylist };

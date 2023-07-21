@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
-import { getSearchResults, saveNewPlaylist, getToken } from '../../util/spotifyApi';
+import { getToken, getSearchResults, saveNewPlaylist } from '../../util/spotifyApi';
 
 function App() {
   const [listName, setListName] = useState('');
